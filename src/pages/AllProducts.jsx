@@ -20,7 +20,7 @@ const AllProducts = ({ endpoint }) => {
   }, [endpoint]);
   return (
     <>
-      <UploadProduct />
+     
       <h1>INI LIST BARANG</h1>
       <div className="py-10 px-5">
         <div className="flex flex-col md:flex-row items-center justify-center">
@@ -28,16 +28,19 @@ const AllProducts = ({ endpoint }) => {
             {data.map((item) => (
               <AllProductsList
                 key={item.id}
+                id={item.id}
                 harga_beli={item.harga_beli}
                 nama_barang={item.nama_barang}
                 foto_barang={item.foto_barang}
                 harga_jual={item.harga_jual}
                 link={`/products/${item.id}`} // Updated link value
               ></AllProductsList>
+              
             ))}
           </div>
         </div>
       </div>
+      <UploadProduct />
     </>
   );
 };

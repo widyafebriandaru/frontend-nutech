@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function UploadProduct() {
+function EditProduct({ link }) {
   const [image, setImage] = useState("https://fakeimg.pl/350x200/");
   const [saveImage, setSaveImage] = useState(null);
   const [productInfo, setProductInfo] = useState({
@@ -9,6 +9,7 @@ function UploadProduct() {
     harga_jual: 0,
     stok: 0,
   });
+  const productId = link.substring(link.lastIndexOf("/") + 1);
 
   function handleUploadChange(e) {
     let uploaded = e.target.files[0];
@@ -21,28 +22,29 @@ function UploadProduct() {
       let formData = new FormData();
       formData.append("photo", saveImage);
 
-      fetch("http://localhost:3002/api/upload", {
+      // Use the FormData directly for the image upload
+      fetch(`http://localhost:3002/api/upload/`, {
         method: "POST",
         body: formData,
       })
         .then((res) => res.json())
         .then((data) => {
-          const newProductInfo = {
+          const updatedProductInfo = {
             ...productInfo,
             foto_barang: data.image,
           };
 
-          // Send the product info to the backend
-          fetch("http://localhost:3002/products", {
-            method: "POST",
+          // Send the updated product info to the backend
+          fetch(`http://localhost:3002/products/${productId}`, {
+            method: "PATCH",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(newProductInfo),
+            body: JSON.stringify(updatedProductInfo),
           })
             .then((res) => res.json())
             .then((response) => {
-              console.log(response);
+              console.log("Response from backend:",response);
             });
         });
     } else {
@@ -110,7 +112,7 @@ function UploadProduct() {
             onClick={handleSave}
             className="mt-2 w-full bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md"
           >
-            Upload Product
+            EDIT Product
           </button>
         </div>
       </div>
@@ -118,4 +120,4 @@ function UploadProduct() {
   );
 }
 
-export default UploadProduct;
+export default EditProduct;
