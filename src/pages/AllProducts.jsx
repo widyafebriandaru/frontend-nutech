@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AllProductsList from "../components/AllProductList";
-
+import UploadProduct from "../components/UploadProduct";
 const AllProducts = ({ endpoint }) => {
   const [data, setData] = useState([]);
 
@@ -20,7 +20,8 @@ const AllProducts = ({ endpoint }) => {
   }, [endpoint]);
   return (
     <>
-    <h1>INI LIST BARANG</h1>
+      <UploadProduct />
+      <h1>INI LIST BARANG</h1>
       <div className="py-10 px-5">
         <div className="flex flex-col md:flex-row items-center justify-center">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -28,7 +29,6 @@ const AllProducts = ({ endpoint }) => {
               <AllProductsList
                 key={item.id}
                 harga_beli={item.harga_beli}
-                // imgUrl={item.thumbnailPreview}
                 nama_barang={item.nama_barang}
                 foto_barang={item.foto_barang}
                 harga_jual={item.harga_jual}
