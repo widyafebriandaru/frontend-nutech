@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logOut, reset, getMe } from "../features/authSlice";
 import axios from "axios";
+import * as Dialog from "@radix-ui/react-dialog";
 
 function UploadProduct({refreshProduct}) {
   const [image, setImage] = useState("https://fakeimg.pl/350x200/");
@@ -110,12 +111,14 @@ function UploadProduct({refreshProduct}) {
             onChange={handleInputChange}
             className="mt-1 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
           />
+          <Dialog.Close>
           <button
             onClick={handleSave}
             className="mt-2 w-full bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md"
           >
             Upload Product
           </button>
+          </Dialog.Close>
         </div>
       </div>
     </div>

@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 function EditProduct({ link }) {
   const [image, setImage] = useState("https://fakeimg.pl/350x200/");
   const [saveImage, setSaveImage] = useState(null);
+  const { user } = useSelector((state) => state.auth);
   const [productInfo, setProductInfo] = useState({
     nama_barang: "",
     harga_beli: 0,
@@ -11,55 +14,50 @@ function EditProduct({ link }) {
   });
   const productId = link.substring(link.lastIndexOf("/") + 1);
 
-  function handleUploadChange(e) {
+  const handleUploadChange = (e) => {
     let uploaded = e.target.files[0];
     setImage(URL.createObjectURL(uploaded));
     setSaveImage(uploaded);
-  }
+  };
 
-  function handleSave() {
+  const handleSave = () => {
     if (saveImage) {
       let formData = new FormData();
       formData.append("photo", saveImage);
 
-      // Use the FormData directly for the image upload
-      fetch(`http://localhost:3002/api/upload/`, {
-        method: "POST",
-        body: formData,
-      })
-        .then((res) => res.json())
-        .then((data) => {
+      // Use Axios for the image upload
+      axios.post("http://localhost:3002/api/upload/", formData)
+        .then((response) => {
           const updatedProductInfo = {
             ...productInfo,
-            foto_barang: data.image,
+            foto_barang: response.data.image,
           };
 
-          // Send the updated product info to the backend
-          fetch(`http://localhost:3002/products/${productId}`, {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(updatedProductInfo),
-          })
-            .then((res) => res.json())
+          // Send the updated product info to the backend using Axios
+          axios.patch(`http://localhost:3002/products/${productId}`, updatedProductInfo)
             .then((response) => {
-              console.log("Response from backend:", response);
+              console.log("Response from backend:", response.data);
+            })
+            .catch((error) => {
+              console.error("Error updating product info:", error);
             });
+        })
+        .catch((error) => {
+          console.error("Error uploading image:", error);
         });
     } else {
       alert("Upload gambar dulu");
     }
-  }
+  };
 
-  function handleInputChange(event) {
+  const handleInputChange = (event) => {
     const { name, value } = event.target;
     setProductInfo({
       ...productInfo,
       [name]: value,
     });
-  }
-
+  };
+  
   return (
     <div className="flex justify-center items-center">
       <div className="mx-auto">
