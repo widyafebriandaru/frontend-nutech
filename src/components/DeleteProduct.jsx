@@ -1,22 +1,18 @@
-import React, { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 const DeleteProduct = ({ link }) => {
   const productId = link.substring(link.lastIndexOf("/") + 1);
+  const { user, isError, isSuccess, isLoading, message } = useSelector(
+    (state) => state.auth
+  );
   const deleteProduct = async () => {
     try {
-      const response = await fetch(`http://localhost:3002/products/${productId}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (response.ok) {
-        // Delete was successful, you might want to update your UI or fetch updated data here
-        console.log('Product deleted successfully');
-      } else {
-        console.error('Error deleting product:', response.statusText);
+      if(user.accountType !== "Admin"){
+        alert("Hanya Admin yang dapat menghapus product")
       }
+      await axios.delete(`http://localhost:3002/products/${productId}`);
+      
     } catch (error) {
       console.error('Error deleting product:', error);
     }
@@ -25,6 +21,9 @@ const DeleteProduct = ({ link }) => {
   return (
     <>
       <h1>ARE YOU SURE WANT TO DELETE?</h1>
+      <p>{user && user.name}</p>
+      {isError && <h1 className=" text-red-500">{message}</h1>}
+      <p>{user && user.accountType}</p>
       <button onClick={deleteProduct} className='bg-red-200'>YEAH DUDE</button>
       <h1>{productId}</h1>
     </>

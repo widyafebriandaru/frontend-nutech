@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Dialog from "@radix-ui/react-dialog";
 import UploadProduct from "./UploadProduct";
@@ -19,6 +20,7 @@ const AllProductsList = ({
   //   navigate(foto_barang);
 
   // };
+
   return (
     <>
       <div
