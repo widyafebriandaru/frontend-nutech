@@ -44,7 +44,7 @@ function EditProduct({ link }) {
           })
             .then((res) => res.json())
             .then((response) => {
-              console.log("Response from backend:",response);
+              console.log("Response from backend:", response);
             });
         });
     } else {
@@ -67,7 +67,10 @@ function EditProduct({ link }) {
           <img src={image} className="rounded-md" alt="..." />
         </div>
         <div className="my-3">
-          <label htmlFor="formFile" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="formFile"
+            className="block text-sm font-medium text-gray-700"
+          >
             Upload image here
           </label>
           <input
