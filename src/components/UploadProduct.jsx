@@ -32,7 +32,7 @@ function UploadProduct({ refreshProduct }) {
       !Number.isInteger(parseInt(productInfo.stok))
     ) {
       setErrorMessage("Harga beli, harga jual, dan stok harus berupa angka");
-      return; // Return early if validation fails
+      return; 
     }
 
     if (saveImage) {
