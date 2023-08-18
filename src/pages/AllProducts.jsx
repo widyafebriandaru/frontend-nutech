@@ -26,6 +26,16 @@ const AllProducts = () => {
   };
 
   useEffect(() => {
+    if (isError) {
+      navigate("/");
+    }
+  }, [isError, navigate]);
+
+  if (user && user.accountType === "") {
+    navigate("/");
+  }
+
+  useEffect(() => {
     getProducts();
   }, []);
 
