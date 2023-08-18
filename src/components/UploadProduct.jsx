@@ -1,10 +1,7 @@
 import React, { useState, useRef } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { logOut, reset, getMe } from "../features/authSlice";
 import axios from "axios";
 import * as Dialog from "@radix-ui/react-dialog";
-import { Cross1Icon } from '@radix-ui/react-icons'
+import { Cross1Icon } from "@radix-ui/react-icons";
 
 function UploadProduct({ refreshProduct }) {
   const [image, setImage] = useState("https://fakeimg.pl/350x200/");
@@ -18,8 +15,6 @@ function UploadProduct({ refreshProduct }) {
 
   const [errorMessage, setErrorMessage] = useState(""); // State to hold error message
   const [successMessage, setSuccessMessage] = useState(""); // State to hold success message
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleUploadChange = (e) => {
     let uploaded = e.target.files[0];
@@ -29,52 +24,72 @@ function UploadProduct({ refreshProduct }) {
 
   const fileInputRef = useRef(null);
   const handleSave = () => {
+
+     // Validate harga_beli, harga_jual, and stok as integers
+     if (
+      !Number.isInteger(parseInt(productInfo.harga_beli)) ||
+      !Number.isInteger(parseInt(productInfo.harga_jual)) ||
+      !Number.isInteger(parseInt(productInfo.stok))
+    ) {
+      setErrorMessage("Harga beli, harga jual, dan stok harus berupa angka");
+      return; // Return early if validation fails
+    }
+
     if (saveImage) {
-      let formData = new FormData();
-      formData.append("photo", saveImage);
-
-      axios
-        .post("http://localhost:3002/api/upload", formData)
-        .then((response) => {
-          const newProductInfo = {
-            ...productInfo,
-            foto_barang: response.data.image,
-          };
-
-          // Send the product info to the backend
-          axios
-            .post("http://localhost:3002/products", newProductInfo)
-            .then((response) => {
-              console.log(response.data);
-              refreshProduct();
-              setProductInfo({
-                nama_barang: "",
-                harga_beli: 0,
-                harga_jual: 0,
-                stok: 0,
-                
-              });
-              fileInputRef.current.value = null;
-              setImage("https://fakeimg.pl/350x200/");
-              setSuccessMessage("Success add product");
-              setErrorMessage("");
-            })
-            
-            .catch((error) => {
-              console.error("Error uploading product info:", error);
-              setErrorMessage(error.response.data.error);
-              setSuccessMessage("");
-            });
-        })
-        .catch((error) => {
-          console.error("Error uploading image:", error);
-          setErrorMessage("Error uploading image: " + error.message); // Set error message for the popup
-        });
+      // Validate file size (max 100KB) and format (JPG or PNG)
+      if (saveImage.size > 100 * 1024) {
+        setErrorMessage("Image size should be less than 100KB");
+      } else if (
+        !saveImage.type.includes("jpeg") &&
+        !saveImage.type.includes("png")
+      ) {
+        setErrorMessage("Image format should be JPG or PNG");
+      } else {
+        setErrorMessage(""); // Clear error message
         
+        let formData = new FormData();
+        formData.append("photo", saveImage);
+        
+        axios
+          .post("http://localhost:3002/api/upload", formData)
+          .then((response) => {
+            const newProductInfo = {
+              ...productInfo,
+              foto_barang: response.data.image,
+            };
+            
+            // Send the product info to the backend
+            axios
+              .post("http://localhost:3002/products", newProductInfo)
+              .then((response) => {
+                console.log(response.data);
+                refreshProduct();
+                
+                setProductInfo({
+                  nama_barang: "",
+                  harga_beli: 0,
+                  harga_jual: 0,
+                  stok: 0,
+                });
+                fileInputRef.current.value = null;
+                setImage("https://fakeimg.pl/350x200/");
+                setSuccessMessage("Success add product");
+              })
+              .catch((error) => {
+                console.error("Error uploading product info:", error);
+                setErrorMessage(error.response.data.error);
+                setSuccessMessage("");
+              });
+          })
+          .catch((error) => {
+            console.error("Error uploading image:", error);
+            setErrorMessage("Error uploading image: " + error.message);
+            setSuccessMessage("");
+          });
+      }
     } else {
       alert("Upload gambar dulu");
     }
-    
   };
 
   const handleInputChange = (event) => {

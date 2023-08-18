@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logOut, reset, getMe } from "../features/authSlice";
 import axios from "axios";
 import * as Dialog from "@radix-ui/react-dialog";
+import Search from "../components/Search";
 
 const AllProducts = () => {
   const [data, setData] = useState([]);
@@ -51,6 +52,7 @@ const AllProducts = () => {
   
   return (
     <>
+    
       <button className="bg-red-500 p-2" onClick={logout}>
         Logout
       </button>
@@ -67,6 +69,7 @@ const AllProducts = () => {
           </Dialog.Content>
         </Dialog.Portal>
       </Dialog.Root>
+      <Search/>
       <h1>INI LIST BARANG</h1>
       <h2>
         {" "}

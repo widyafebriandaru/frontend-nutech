@@ -6,6 +6,7 @@ import UploadProduct from "./UploadProduct";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
+
 const AllProductsList = ({
   nama_barang,
   foto_barang,
@@ -37,6 +38,7 @@ const AllProductsList = ({
 
   const [image, setImage] = useState("https://fakeimg.pl/350x200/");
   const [saveImage, setSaveImage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(""); // State to hold error message
   const [productInfo, setProductInfo] = useState({
     nama_barang: "",
     harga_beli: 0,
@@ -76,6 +78,7 @@ const AllProductsList = ({
             })
             .catch((error) => {
               console.error("Error updating product info:", error);
+              setErrorMessage(error.response.data.error);
             });
         })
         .catch((error) => {
@@ -96,10 +99,11 @@ const AllProductsList = ({
 
   return (
     <>
+
       <div
         target="_blank"
         rel="noopener noreferrer"
-        className="hover-item hover:opacity-80 text-[#232324] rounded-md overflow-hidden font-sans mx-3 max-w-[277px] border border-black"
+        className="hover-item  text-[#232324] rounded-md overflow-hidden font-sans mx-3 max-w-[277px] border border-black"
       >
         <h2 className="text-base md:text-l pt-2 md:mb-1 font-normal text-center">
           {nama_barang}
@@ -122,7 +126,7 @@ const AllProductsList = ({
         </div>
         <Dialog.Root>
           <Dialog.Trigger>
-            <button className="p-2 bg-blue-400">UPDATE</button>
+            <button className="p-2 bg-blue-400 hover:opacity-80">UPDATE</button>
           </Dialog.Trigger>
           <Dialog.Portal>
             <Dialog.Overlay className="bg-black" />
@@ -196,7 +200,7 @@ const AllProductsList = ({
 
         <Dialog.Root>
           <Dialog.Trigger>
-            <button className="p-2 bg-red-400">DELETE</button>
+            <button className="p-2 bg-red-400 hover:opacity-80">DELETE</button>
           </Dialog.Trigger>
           <Dialog.Portal>
             <Dialog.Overlay className="bg-black" />
