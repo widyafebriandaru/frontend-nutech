@@ -37,11 +37,9 @@ const Login = () => {
     dispatch(loginUser({ email, password }));
   };
 
-
   const toggleLoginRegister = () => {
     setShowLogin(!showLogin);
   };
-  
 
   const [name, setName] = useState("");
   const [regEmail, setRegEmail] = useState("");
@@ -60,7 +58,7 @@ const Login = () => {
         accountType: "Pegawai",
       });
       toggleLoginRegister();
-      alert("Register Success, please login to your account")
+      alert("Register Success, please login to your account");
     } catch (error) {
       if (error.response) {
         setMsg(error.response.data.msg);
@@ -105,6 +103,8 @@ const Login = () => {
               >
                 {isLoading ? "Loading..." : "Login"}
               </button>
+              <p className="font-light text-sm text-blue-700">AKUN Admin: admin@gmail.com</p>
+              <p className="font-light text-sm text-blue-700">PW Admin: 111111</p>
 
               <p className="mt-4">
                 Do not have an account?{" "}
