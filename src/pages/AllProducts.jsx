@@ -52,7 +52,8 @@ const AllProducts = () => {
 
   return (
     <>
-      <div className="ml-14">
+    <div className="bg-slate-200">
+      <div className="ml-16">
         <h2>
           {" "}
           Welcome Back{" "}
@@ -60,12 +61,12 @@ const AllProducts = () => {
             {user && user.name} sebagai {user && user.accountType}
           </strong>
         </h2>
-        <button className="bg-red-500 py-1 px-2 rounded-md" onClick={logout}>
+        <button className="bg-red-500 py-1 px-2 rounded-md font-semibold hover:opacity-75" onClick={logout}>
           Logout
         </button>
         <Dialog.Root>
           <Dialog.Trigger>
-            <button className="bg-blue-500 ml-2 py-1 px-2 rounded-md">Tambah Product</button>
+            <button className="bg-blue-500 ml-2 py-1 px-2 rounded-md font-semibold hover:opacity-75">Tambah Product</button>
           </Dialog.Trigger>
           <Dialog.Portal>
             <Dialog.Overlay />
@@ -100,6 +101,7 @@ const AllProducts = () => {
             ))}
           </div>
         </div>
+      </div>
       </div>
     </>
   );

@@ -103,25 +103,25 @@ function UploadProduct({ refreshProduct }) {
   return (
     <div className="flex justify-center items-center">
       <div className="mx-auto ">
-        <div className="w-full flex justify-end border">
+        <div className="w-full flex justify-end ">
         <Dialog.Close>
-        <Cross1Icon className="h-5 w-5"/>
+        <Cross1Icon className="h-5 w-5 mt-2 mr-2 hover:opacity-80"/>
         </Dialog.Close>
         </div>
-        <div>
+        <div className="m-2">
           <img src={image} className="rounded-md" alt="..." />
         </div>
         <div className="my-3">
           <label
             htmlFor="formFile"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-700 mx-2"
           >
             Upload image here
           </label>
           <input
           ref={fileInputRef} // Attach the ref to the file input
             onChange={handleUploadChange}
-            className="mt-1 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
+            className="mt-1 px-2 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
             type="file"
             id="formFile"
           />
@@ -131,7 +131,7 @@ function UploadProduct({ refreshProduct }) {
             placeholder="Nama Barang"
             value={productInfo.nama_barang}
             onChange={handleInputChange}
-            className="mt-1 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
+            className="mt-1 px-2 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
           />
           <input
             type="text"
@@ -139,7 +139,7 @@ function UploadProduct({ refreshProduct }) {
             placeholder="Nama Barang"
             value={productInfo.harga_beli}
             onChange={handleInputChange}
-            className="mt-1 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
+            className="mt-1 px-2 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
           />
           <input
             type="text"
@@ -147,7 +147,7 @@ function UploadProduct({ refreshProduct }) {
             placeholder="Nama Barang"
             value={productInfo.harga_jual}
             onChange={handleInputChange}
-            className="mt-1 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
+            className="mt-1 px-2 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
           />
           <input
             type="text"
@@ -155,7 +155,7 @@ function UploadProduct({ refreshProduct }) {
             placeholder="Nama Barang"
             value={productInfo.stok}
             onChange={handleInputChange}
-            className="mt-1 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
+            className="mt-1 px-2 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
           />
             <button
               onClick={handleSave}

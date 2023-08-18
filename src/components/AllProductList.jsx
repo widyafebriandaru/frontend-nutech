@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Dialog from "@radix-ui/react-dialog";
-import UploadProduct from "./UploadProduct";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";
-
+import { Cross1Icon } from "@radix-ui/react-icons";
 
 const AllProductsList = ({
   nama_barang,
@@ -17,10 +16,7 @@ const AllProductsList = ({
   refreshProduct, //buat dikirim ke parent
 }) => {
   const productId = link.substring(link.lastIndexOf("/") + 1);
-  const { user, isError, isSuccess, isLoading, message } = useSelector(
-    (state) => state.auth
-  );
-  const navigate = useNavigate();
+  const { user, isError, message } = useSelector((state) => state.auth);
 
   //DELETE START
   const deleteProduct = async () => {
@@ -99,127 +95,135 @@ const AllProductsList = ({
 
   return (
     <>
-
       <div
         target="_blank"
         rel="noopener noreferrer"
-        className="hover-item  text-[#232324] rounded-md overflow-hidden font-sans mx-3 max-w-[277px] border border-black"
+        className="hover-item  text-[#232324] rounded-md overflow-hidden font-sans mx-3 max-w-[277px] border border-black shadow-md"
       >
-        <h2 className="text-base md:text-l pt-2 md:mb-1 font-normal text-center">
+        <h2 className="text-2xl md:text-l md:mb-1 font-semibold text-center">
           {nama_barang}
         </h2>
         <div className="flex justify-center">
           <img
             src={foto_barang}
             alt="image"
-            className="md:w-full w-52 h-36 md:h-48 object-cover mt-4"
+            className="md:w-56 w-40 h-26 md:h-38 object-contain mt-4"
           />
         </div>
-        <div className="text-sm font-semibold w-full flex">
+        <div className="text-sm font-semibold w-full">
           <div className="text-center">Harga Beli = {harga_beli}</div>
+          <div className="text-center">Harga Jual = {harga_jual}</div>
         </div>
-        <div className="w-full sm:px-8 ">
-          <h2 className="text-center text-l md:text-xl font-semibold">
-            {" "}
-            <p className="text-red-500">Harga Jual = {harga_jual}</p> {stok}
-          </h2>
-        </div>
-        <Dialog.Root>
-          <Dialog.Trigger>
-            <button className="p-2 bg-blue-400 hover:opacity-80">UPDATE</button>
-          </Dialog.Trigger>
-          <Dialog.Portal>
-            <Dialog.Overlay className="bg-black" />
-            <Dialog.Content className="fixed top-1/2 left-1/2 rounded-md shadow bg-white -translate-x-1/2 -translate-y-1/2">
-              <div>
-                <div className="flex justify-center items-center">
-                  <div className="mx-auto">
-                    <div>
-                      <img src={image} className="rounded-md" alt="..." />
-                    </div>
-                    <div className="my-3">
-                      <label
-                        htmlFor="formFile"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Upload image here
-                      </label>
-                      <input
-                        onChange={handleUploadChange}
-                        className="mt-1 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
-                        type="file"
-                        id="formFile"
-                      />
-                      <input
-                        type="text"
-                        name="nama_barang"
-                        placeholder="Nama Barang"
-                        value={productInfo.nama_barang}
-                        onChange={handleInputChange}
-                        className="mt-1 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
-                      />
-                      <input
-                        type="text"
-                        name="harga_beli"
-                        placeholder="Nama Barang"
-                        value={productInfo.harga_beli}
-                        onChange={handleInputChange}
-                        className="mt-1 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
-                      />
-                      <input
-                        type="text"
-                        name="harga_jual"
-                        placeholder="Nama Barang"
-                        value={productInfo.harga_jual}
-                        onChange={handleInputChange}
-                        className="mt-1 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
-                      />
-                      <input
-                        type="text"
-                        name="stok"
-                        placeholder="Nama Barang"
-                        value={productInfo.stok}
-                        onChange={handleInputChange}
-                        className="mt-1 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
-                      />
-                      <Dialog.Close>
-                        <button
-                          onClick={handleSave}
-                          className="mt-2 w-full bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md"
+        <div className="w-full flex justify-around mb-2">
+          <Dialog.Root>
+            <Dialog.Trigger>
+              <button className="p-2 font-semibold text-slate-800 bg-blue-400 hover:opacity-80 rounded-md">
+                UPDATE
+              </button>
+            </Dialog.Trigger>
+            <Dialog.Portal>
+              <Dialog.Overlay className="bg-black" />
+              <Dialog.Content className="fixed top-1/2 left-1/2 rounded-md shadow bg-white -translate-x-1/2 -translate-y-1/2">
+                <div>
+                  <div className="flex justify-center items-center">
+                    <div className="mx-auto">
+                      <div className="w-full flex justify-end ">
+                        <Dialog.Close>
+                          <Cross1Icon className="h-5 w-5 mt-2 mr-2 hover:opacity-80" />
+                        </Dialog.Close>
+                      </div>
+                      <div className="m-2">
+                        <img src={image} className="rounded-md" alt="..." />
+                      </div>
+                      <div className="my-3">
+                        <label
+                          htmlFor="formFile"
+                          className="block px-2 text-sm font-medium text-gray-700"
                         >
-                          EDIT Product
-                        </button>
-                      </Dialog.Close>
+                          Upload image here
+                        </label>
+                        <input
+                          onChange={handleUploadChange}
+                          className="mt-1 px-2 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
+                          type="file"
+                          id="formFile"
+                        />
+                        <input
+                          type="text"
+                          name="nama_barang"
+                          placeholder="Nama Barang"
+                          value={productInfo.nama_barang}
+                          onChange={handleInputChange}
+                          className="mt-1 px-2 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
+                        />
+                        <input
+                          type="text"
+                          name="harga_beli"
+                          placeholder="Nama Barang"
+                          value={productInfo.harga_beli}
+                          onChange={handleInputChange}
+                          className="mt-1 px-2 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
+                        />
+                        <input
+                          type="text"
+                          name="harga_jual"
+                          placeholder="Nama Barang"
+                          value={productInfo.harga_jual}
+                          onChange={handleInputChange}
+                          className="mt-1 px-2 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
+                        />
+                        <input
+                          type="text"
+                          name="stok"
+                          placeholder="Nama Barang"
+                          value={productInfo.stok}
+                          onChange={handleInputChange}
+                          className="mt-1 px-2 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
+                        />
+                        <Dialog.Close className="w-full">
+                          <button
+                            onClick={handleSave}
+                            className="mt-2 w-full bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md"
+                          >
+                            EDIT Product
+                          </button>
+                        </Dialog.Close>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </Dialog.Content>
-          </Dialog.Portal>
-        </Dialog.Root>
+              </Dialog.Content>
+            </Dialog.Portal>
+          </Dialog.Root>
 
-        <Dialog.Root>
-          <Dialog.Trigger>
-            <button className="p-2 bg-red-400 hover:opacity-80">DELETE</button>
-          </Dialog.Trigger>
-          <Dialog.Portal>
-            <Dialog.Overlay className="bg-black" />
-            <Dialog.Content className="fixed top-1/2 left-1/2 rounded-md shadow bg-white -translate-x-1/2 -translate-y-1/2">
-              <div>
-                <h1>ARE YOU SURE WANT TO DELETE?</h1>
-                <p>{user && user.name}</p>
-                {isError && <h1 className=" text-red-500">{message}</h1>}
-                <p>{user && user.accountType}</p>
-                <Dialog.Close>
-                  <button onClick={deleteProduct} className="bg-red-200">
-                    YEAH DUDE
-                  </button>
-                </Dialog.Close>
-                <h1>{productId}</h1>
-              </div>
-            </Dialog.Content>
-          </Dialog.Portal>
-        </Dialog.Root>
+          <Dialog.Root>
+            <Dialog.Trigger>
+              <button className="p-2 font-semibold text-slate-800 bg-red-400 hover:opacity-80 rounded-md">
+                DELETE
+              </button>
+            </Dialog.Trigger>
+            <Dialog.Portal>
+              <Dialog.Overlay className="bg-black" />
+              <Dialog.Content className="fixed top-1/2 left-1/2 rounded-md shadow bg-white -translate-x-1/2 -translate-y-1/2">
+                <div className="p-4">
+                  <h1 className="font-semibold text-lg">Yakin ingin menghapus?</h1>
+                  <div className="flex justify-around">
+                  <Dialog.Close>
+                    <button onClick={deleteProduct} className="bg-red-400 font-semibold px-3 rounded-md hover:opacity-75">
+                      Ya
+                    </button>
+                  </Dialog.Close>
+                  <Dialog.Close>
+                    <button className="bg-slate-200 font-semibold px-3 rounded-md hover:opacity-75">
+                      Tidak
+                    </button>
+                  </Dialog.Close>
+                  </div>
+                </div>
+              </Dialog.Content>
+            </Dialog.Portal>
+          </Dialog.Root>
+        </div>
       </div>
     </>
   );
