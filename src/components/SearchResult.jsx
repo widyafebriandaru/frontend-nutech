@@ -2,13 +2,16 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import AllProductsList from './AllProductList';
+import { useNavigate } from 'react-router-dom';
+import Search from './Search';
 
 const SearchResults = () => {
   const location = useLocation();
   const searchQuery = new URLSearchParams(location.search).get('query');
-
+    const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,8 +37,9 @@ const SearchResults = () => {
   return (
     <>
       <div className="bg-slate-600 h-[57px]">
+        <button className='p-2' onClick={() => navigate("/Products")}>BACK</button>
       </div>
-
+    <Search/>
       <div className="py-10">
         <div className="flex flex-col md:flex-row items-center justify-center">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">

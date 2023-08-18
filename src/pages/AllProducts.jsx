@@ -49,35 +49,40 @@ const AllProducts = () => {
   const handleRefreshProduct = () => {
     getProducts();
   };
-  
+
   return (
     <>
-    
-      <button className="bg-red-500 p-2" onClick={logout}>
-        Logout
-      </button>
-      <Dialog.Root>
-        <Dialog.Trigger>
-          <button className="bg-blue-500 p-2 ml-5">Tambah Product</button>
-        </Dialog.Trigger>
-        <Dialog.Portal>
-          <Dialog.Overlay />
-          <Dialog.Content>
-            <div className="fixed top-1/2 left-1/2 rounded-md shadow bg-white -translate-x-1/2 -translate-y-1/2">
-            <UploadProduct refreshProduct={handleRefreshProduct}/>
-            </div>
-          </Dialog.Content>
-        </Dialog.Portal>
-      </Dialog.Root>
-      <Search/>
-      <h1>INI LIST BARANG</h1>
-      <h2>
-        {" "}
-        Welcome Back{" "}
-        <strong>
-          {user && user.name} sebagai {user && user.accountType}
-        </strong>
-      </h2>
+      <div className="ml-14">
+        <h2>
+          {" "}
+          Welcome Back{" "}
+          <strong>
+            {user && user.name} sebagai {user && user.accountType}
+          </strong>
+        </h2>
+        <button className="bg-red-500 py-1 px-2 rounded-md" onClick={logout}>
+          Logout
+        </button>
+        <Dialog.Root>
+          <Dialog.Trigger>
+            <button className="bg-blue-500 ml-2 py-1 px-2 rounded-md">Tambah Product</button>
+          </Dialog.Trigger>
+          <Dialog.Portal>
+            <Dialog.Overlay />
+            <Dialog.Content>
+              <div className="fixed top-1/2 left-1/2 rounded-md shadow bg-white -translate-x-1/2 -translate-y-1/2">
+                <UploadProduct refreshProduct={handleRefreshProduct} />
+              </div>
+            </Dialog.Content>
+          </Dialog.Portal>
+        </Dialog.Root>
+        <div className="mt-2">
+          <Search />
+        </div>
+      </div>
+      <h1 className="w-full flex justify-center font-bold text-2xl">
+        LIST BARANG
+      </h1>
       <div className="py-10 px-5">
         <div className="flex flex-col md:flex-row items-center justify-center">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">

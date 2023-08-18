@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { MagnifyingGlassIcon } from '@radix-ui/react-icons'
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -25,9 +26,11 @@ const Search = () => {
             placeholder="Search..."
           />
           <Link
+          
             to={`/search?query=${encodeURIComponent(searchQuery)}`}
             className="ml-2 text-sm bg-gray-300 text-gray-700 rounded px-1 py-1 hover:bg-[#232324] hover:text-gray-300 transition ease-in-out duration-[350ms]"
           >
+            <MagnifyingGlassIcon/>
           </Link>
         </form>
       </div>
