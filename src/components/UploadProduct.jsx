@@ -125,6 +125,7 @@ function UploadProduct({ refreshProduct }) {
             type="file"
             id="formFile"
           />
+          <div className="flex justify-center w-full"><p className="w-full">Nama :</p>
           <input
             type="text"
             name="nama_barang"
@@ -133,6 +134,8 @@ function UploadProduct({ refreshProduct }) {
             onChange={handleInputChange}
             className="mt-1 px-2 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
           />
+           </div>
+           <div className="flex justify-center w-full"><p className="w-full">Harga Beli :</p>
           <input
             type="text"
             name="harga_beli"
@@ -141,6 +144,8 @@ function UploadProduct({ refreshProduct }) {
             onChange={handleInputChange}
             className="mt-1 px-2 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
           />
+          </div>
+          <div className="flex justify-center w-full"><p className="w-full">Harga Jual :</p>
           <input
             type="text"
             name="harga_jual"
@@ -149,6 +154,8 @@ function UploadProduct({ refreshProduct }) {
             onChange={handleInputChange}
             className="mt-1 px-2 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
           />
+          </div>
+          <div className="flex justify-center w-full"><p className="w-full">Stok :</p>
           <input
             type="text"
             name="stok"
@@ -157,6 +164,7 @@ function UploadProduct({ refreshProduct }) {
             onChange={handleInputChange}
             className="mt-1 px-2 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
           />
+          </div>
             <button
               onClick={handleSave}
               className="mt-2 w-full bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md"

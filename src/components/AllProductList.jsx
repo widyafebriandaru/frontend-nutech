@@ -148,38 +148,50 @@ const AllProductsList = ({
                           type="file"
                           id="formFile"
                         />
-                        <input
-                          type="text"
-                          name="nama_barang"
-                          placeholder="Nama Barang"
-                          value={productInfo.nama_barang}
-                          onChange={handleInputChange}
-                          className="mt-1 px-2 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
-                        />
-                        <input
-                          type="text"
-                          name="harga_beli"
-                          placeholder="Nama Barang"
-                          value={productInfo.harga_beli}
-                          onChange={handleInputChange}
-                          className="mt-1 px-2 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
-                        />
-                        <input
-                          type="text"
-                          name="harga_jual"
-                          placeholder="Nama Barang"
-                          value={productInfo.harga_jual}
-                          onChange={handleInputChange}
-                          className="mt-1 px-2 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
-                        />
-                        <input
-                          type="text"
-                          name="stok"
-                          placeholder="Nama Barang"
-                          value={productInfo.stok}
-                          onChange={handleInputChange}
-                          className="mt-1 px-2 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
-                        />
+                        <div className="flex justify-center w-full">
+                          <p className="w-full">Nama :</p>
+                          <input
+                            type="text"
+                            name="nama_barang"
+                            placeholder="Nama Barang"
+                            value={productInfo.nama_barang}
+                            onChange={handleInputChange}
+                            className="mt-1 px-2 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
+                          />
+                        </div>
+                        <div className="flex justify-center w-full">
+                          <p className="w-full">Harga Beli :</p>
+                          <input
+                            type="text"
+                            name="harga_beli"
+                            placeholder="Nama Barang"
+                            value={productInfo.harga_beli}
+                            onChange={handleInputChange}
+                            className="mt-1 px-2 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
+                          />
+                        </div>
+                        <div className="flex justify-center w-full">
+                          <p className="w-full">Harga Jual :</p>
+                          <input
+                            type="text"
+                            name="harga_jual"
+                            placeholder="Nama Barang"
+                            value={productInfo.harga_jual}
+                            onChange={handleInputChange}
+                            className="mt-1 px-2 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
+                          />
+                        </div>
+                        <div className="flex justify-center w-full">
+                          <p className="w-full">Stok :</p>
+                          <input
+                            type="text"
+                            name="stok"
+                            placeholder="Nama Barang"
+                            value={productInfo.stok}
+                            onChange={handleInputChange}
+                            className="mt-1 px-2 block w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
+                          />
+                        </div>
                         <Dialog.Close className="w-full">
                           <button
                             onClick={handleSave}
@@ -206,18 +218,23 @@ const AllProductsList = ({
               <Dialog.Overlay className="bg-black" />
               <Dialog.Content className="fixed top-1/2 left-1/2 rounded-md shadow bg-white -translate-x-1/2 -translate-y-1/2">
                 <div className="p-4">
-                  <h1 className="font-semibold text-lg">Yakin ingin menghapus?</h1>
+                  <h1 className="font-semibold text-lg">
+                    Yakin ingin menghapus?
+                  </h1>
                   <div className="flex justify-around">
-                  <Dialog.Close>
-                    <button onClick={deleteProduct} className="bg-red-400 font-semibold px-3 rounded-md hover:opacity-75">
-                      Ya
-                    </button>
-                  </Dialog.Close>
-                  <Dialog.Close>
-                    <button className="bg-slate-200 font-semibold px-3 rounded-md hover:opacity-75">
-                      Tidak
-                    </button>
-                  </Dialog.Close>
+                    <Dialog.Close>
+                      <button
+                        onClick={deleteProduct}
+                        className="bg-red-400 font-semibold px-3 rounded-md hover:opacity-75"
+                      >
+                        Ya
+                      </button>
+                    </Dialog.Close>
+                    <Dialog.Close>
+                      <button className="bg-slate-200 font-semibold px-3 rounded-md hover:opacity-75">
+                        Tidak
+                      </button>
+                    </Dialog.Close>
                   </div>
                 </div>
               </Dialog.Content>
